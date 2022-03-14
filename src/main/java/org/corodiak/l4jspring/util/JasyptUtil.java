@@ -23,8 +23,11 @@ public class JasyptUtil {
         encryptor.setPassword(key);
         encryptor.setAlgorithm(algo);
 
+
         String enc = encryptor.encrypt(value);
+        System.out.println("ENC");
         System.out.println(enc);
+        System.out.println("DEC");
         System.out.println(encryptor.decrypt(enc));
     }
 }
