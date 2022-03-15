@@ -1,12 +1,11 @@
 package org.corodiak.l4jspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.corodiak.l4jspring.etc.ModelAndViewFactoryImpl;
 import org.corodiak.l4jspring.exception.MemberNotFoundException;
 import org.corodiak.l4jspring.service.MemberService;
 import org.corodiak.l4jspring.vo.MemberVo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +17,10 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class HomeController extends ModelAndViewFactoryImpl {
 
     private final MemberService memberService;
-
-    Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(value = "/")
     public RedirectView index() {
@@ -31,7 +29,7 @@ public class HomeController extends ModelAndViewFactoryImpl {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
-        return "index";
+        return "main";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -45,6 +43,7 @@ public class HomeController extends ModelAndViewFactoryImpl {
             @RequestParam("password") String password,
             HttpServletRequest request
     ) throws MemberNotFoundException {
+        log.info("Login Request : {}", id);
         MemberVo memberVo = memberService.login(id, password);
         request.getSession().setAttribute("memberInfo", memberVo);
         return new RedirectView("/main");

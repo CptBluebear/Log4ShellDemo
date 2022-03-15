@@ -11,13 +11,14 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "MEMBER")
 public class MemberEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
 
-	@Column(unique = true)
+	@Column(unique = true, length = 60)
 	private String id;
 
 	@Column

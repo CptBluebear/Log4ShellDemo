@@ -1,6 +1,7 @@
 package org.corodiak.l4jspring.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.corodiak.l4jspring.entity.MemberEntity;
 import org.corodiak.l4jspring.exception.MemberNotFoundException;
 import org.corodiak.l4jspring.repository.MemberEntityRepository;
@@ -10,6 +11,7 @@ import org.corodiak.l4jspring.util.BCryptProvider;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberEntityRepository repository;
