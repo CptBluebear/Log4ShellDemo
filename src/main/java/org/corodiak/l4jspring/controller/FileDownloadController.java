@@ -17,10 +17,14 @@ public class FileDownloadController {
     @Value("${file.path}")
     String filePath;
 
+    @Value("${file.name}")
+    String fileName;
+
     @RequestMapping("/download")
     public void download(HttpServletResponse response) throws IOException {
-        log.info("File Download : {}", filePath);
-        byte[] fileByte = FileUtils.readFileToByteArray(new File(filePath));
+        String fileLocation = filePath + File.separator + fileName;
+        log.info("File Download : {}", fileName);
+        byte[] fileByte = FileUtils.readFileToByteArray(new File(fileLocation));
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; fileName=\"Program.exe\"");
         response.setHeader("Content-Transfer-Encoding", "binary");
